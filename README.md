@@ -1,4 +1,4 @@
-# To Do List - TKinter
+# To Do List - TKinter 📋
 
 Projeto feito para obtenção de nota final na disciplina Laboratório de Programação II.
 
