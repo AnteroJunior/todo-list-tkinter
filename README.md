@@ -19,7 +19,7 @@ Para o desafio proposto, me foi solicitado um sistema que funcionasse fora do te
 ## Modo de uso
 
 1. Faça o clone do repositório na sua máquina
-`https://github.com/AnteroJunior/todo-list-tkinter.git`
+`git clone https://github.com/AnteroJunior/todo-list-tkinter.git`
 
 2. Ative o ambiente virtual (venv) do Python
     2.1. Caso não tenha iniciado, execute o comando `python -m venv venv`
