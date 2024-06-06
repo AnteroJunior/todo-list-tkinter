@@ -17,17 +17,3 @@ class Database:
         self.connection.cursor.execute(f'SELECT * FROM users WHERE userEmail = ?', (email,))
         user = self.connection.cursor.fetchone()
         return user
-    
-    def add_mock_user(self):
-        password = HashPassword.hash_password('antero')
-        self.connection.cursor.execute(f'INSERT INTO users (userName, userEmail, userPassword) VALUES ("Antero", "antero@antero.com", ?)', (password,))
-
-        self.connection.cnx.commit()
-        self.connection.cnx.close()
-
-    def add_mock_task(self):
-        task = 'Sleep'
-        self.connection.cursor.execute(f'INSERT INTO tasks (taskDesc, idUser) VALUES (?, ?)', (task, 1,))
-
-        self.connection.cnx.commit()
-        self.connection.cnx.close()
