@@ -17,6 +17,5 @@ class Validators:
     @staticmethod
     def verify_name(name):
         if(len(name) >= 3 and re.search(r'^[a-zA-Z]+(?: [a-zA-Z]+)*$', name)):
-            print(name)
             return True
         return False
