@@ -23,7 +23,7 @@ Para o desafio proposto, me foi solicitado um sistema que funcionasse fora do te
 
 2. Ative o ambiente virtual (venv) do Python
     2.1. Caso não tenha iniciado, execute o comando `python -m venv venv`
-3. Utilizando o `pip`, instale os pacotes necessários para a execução do projeto
+3. Utilizando o `pip`, instale os pacotes necessários para a execução do projeto `pip install -r requirements.txt`
 4. Após tudo instalado e configurado, execute o arquivo `main.py` (`python main.py`)
 
 ## Tabelas
