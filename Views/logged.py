@@ -13,6 +13,9 @@ class LoggedView(Frame):
 
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
+
+        # Images
+        self.loupe_img = PhotoImage(file='assets\\loupe.png')
         
         # Study sound
         self.mixer = mixer
@@ -27,14 +30,25 @@ class LoggedView(Frame):
 
         # Variables
         self.new_task_description = StringVar()
+        self.search_task_description = StringVar()
 
         # Tratamento das tasks
         self.tasks = []
 
         # Top text  
-        self.page_title = ttk.Label(self, text=f'Bem vindo, {self.master.user['userName']}')
+        self.page_title = ttk.Label(self, text=f'Bem vindo, {self.master.user["userName"]}')
         self.page_title.configure(font=('monospace', 20))
         self.page_title.pack(side=TOP, pady=10)
+
+        self.search_task_frame = ttk.Frame(self)
+        self.search_task_frame.pack(fill='both', pady=10)
+
+        self.search_task_entry = ttk.Entry(self.search_task_frame, textvariable=self.search_task_description)
+        self.search_task_entry.pack(side=LEFT)
+        self.search_task_entry.configure(width=25)
+
+        self.search_task_button = ttk.Button(self.search_task_frame, command=self.search_task_by_desc, image=self.loupe_img, bootstyle=LIGHT)
+        self.search_task_button.pack(side=LEFT, padx=5)
 
         self.tasks_list = Listbox(self, height=10)
         self.tasks_list.pack(fill='both')
@@ -82,9 +96,7 @@ class LoggedView(Frame):
 
     def get_user_tasks(self):
         self.tasks = Task.get_user_tasks(self.master.user['id'])
-        
-
-        
+    
         self.tasks_list.delete(0, END)
 
         for task in self.tasks:
@@ -108,3 +120,14 @@ class LoggedView(Frame):
         for task in self.tasks:
             if task['taskDesc'] == taskDesc:
                 return task['id']
+            
+    def search_task_by_desc(self):
+        task_desc = self.search_task_description.get()
+        task_list_desc = Task.get_task_by_description(task_desc, self.master.user['id'])
+
+        self.tasks_list.delete(0, END)
+
+        for task in task_list_desc:
+            self.tasks_list.insert(END, task['taskDesc'])
+
+        self.add_bg_color()

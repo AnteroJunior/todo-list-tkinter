@@ -81,3 +81,25 @@ class Task:
 
         except ConnectionError:
             print('Erro durante a inserção do usuário. Tente novamente.')
+    
+    @staticmethod
+    def get_task_by_description(desc: str, id):
+        task_desc = desc.lower()
+        try:
+            cnx = Connection()
+            cnx.cursor.execute('SELECT id, taskDesc, taskStatus FROM tasks WHERE LOWER(taskDesc) LIKE ? AND idUser = ?', ('%' + task_desc + '%', id,))
+
+            res = cnx.cursor.fetchall()
+            tasks = []
+            for task in res:
+                tasks.append({
+                    'id': task[0],
+                    'taskDesc': task[1],
+                    'taskStatus': 'Doing' if task[2] == 0 else 'Done'
+                })
+                
+            cnx.cnx.close()
+            return tasks
+
+        except ConnectionError:
+            print('Erro durante a inserção do usuário. Tente novamente.')
